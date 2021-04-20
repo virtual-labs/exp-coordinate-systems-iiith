@@ -7,8 +7,7 @@
             "d":"answer4"
           },
 "correctAnswer":"a"},
-{"question":"
-Q2. What is the point whose distance from XY plane is 3, YZ plane is -4 and XZ plane is 9 ?",
+{"question":"Q2. What is the point whose distance from XY plane is 3, YZ plane is -4 and XZ plane is 9 ?",
 "answers":{
             "a":"(3, 0, -4)",
             "b":"(-4, 3, 9)",
