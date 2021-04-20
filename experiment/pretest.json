@@ -1,5 +1,5 @@
 [
-{"question":" 1. <img src='media/quiz.png'> Enter the points with brackets and a comman between. Ex. (5, -3)",
+{"question":" 1. <img src='images/quiz.png'> Enter the points with brackets and a comman between. Ex. (5, -3)",
 "answers":{
             "a":"answer1",
             "b":"answer2",
@@ -7,6 +7,7 @@
             "d":"answer4"
           },
 "correctAnswer":"a"},
+            
 {"question":"Q2. What is the point whose distance from XY plane is 3, YZ plane is -4 and XZ plane is 9 ?",
 "answers":{
             "a":"(3, 0, -4)",
