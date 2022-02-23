@@ -1,1 +1,74 @@
-/* You CSS goes in here */
+.page {
+  overflow-x: hidden;
+}
+
+.mainC {
+  /* background-color: #000;
+    width: 60%;
+    height: 100%; */
+  border: 1px solid red;
+  display: flex;
+  /* margin: auto;
+    padding: auto; */
+  /* position: static;  */
+  top: 1000px;
+}
+
+column {
+  /* display: inline-block; */
+  margin: auto;
+  display: flex;
+}
+
+/* #mainC {
+    width: 40% !important;
+    height: 40% !important;
+ display: inline-block !important;
+} */
+
+.v-datalist-container {
+  height: 800px;
+}
+
+.v-slider-full {
+  width: 80%;
+}
+
+.input-form {
+  display: none;
+  color: black;
+}
+
+.add {
+  font-size: 0.9rem;
+}
+
+.left {
+  clear: both;
+}
+
+.exp {
+  clear: both;
+}
+
+.right {
+  clear: both;
+}
+
+@media screen and (max-width: 1023px) {
+  .left {
+    clear: both;
+  }
+
+  .right {
+    clear: both;
+  }
+
+  .exp {
+    clear: both;
+  }
+}
+
+#top-border {
+  border-top: 1px solid black;
+}
