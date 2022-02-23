@@ -1,43 +1,116 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.5-b/css/style.min.css">
+    <link rel="stylesheet" href="main.css">
 </head>
-<body>
-		<!-- Your code goes here-->
 
-		<p><li>This simulation has some <a href="../../../Introduction.html" target="PARENT">software dependencies</a>. We highly recommend you to use our customized <a href="https://vlead.vlabs.ac.in/development/#virtual-box" target="blank">VirtualBox</a> for the smooth running of these simulations.</li></p>
-	<ol>
-             <li> Please download the appropriate Virtual Lab Graphics package below.
-             <br /> 
-	     <b><a href="VirtualLabGraphics.zip">Download</a></b>
-             <br /> </li>
-             <li>Save the <b>VirtualLabGraphics.zip</b> file and double click it to extract.</li>
-             <li> Run the Start.jar in the extracted folder (VirtualLabGraphics folder) to start the experiments.
-               <ul>
-                   <li> Windows/MacOSX users can start the experiment by double clicking the Start.jar file. </li>
-                   <li> Linux users should run Start.jar by executing the following command in the terminal.
-                   <br /> Change to the Virtual Lab Directory.
-                  <br /> <i><b>$</b> cd VirtualLabGraphics/</i>
-                  <br /> Execute the experiment using the command:
-                  <br /> <i><b>$</b> java -jar Start.jar</i> </li>
-                </ul>
-              </li>
-             <li> <b>Alternate Method:</b> If you are not able to start the experiment by the above procedures, you can try the alternate method given below.
-              <ul>
-              <li> Alternatively, Linux/MacOSX users can start the experiment by as described below.
-              <br /> Change to the Virtual Lab Directory.
-              <br /> <i><b>$</b> cd VirtualLabGraphics/</i>
-              <br /> Execute the experiment using the command:
-              <br /> <i><b>$</b> ./Experiment.sh 1</i> </li>
-             <li> Alternatively, Windows users can start the experiment by double clicking the Experiment1.bat file. </li>
-             </ul>
-          </li>
-        </ol>
+<body class="page">
+    </br></br>
 
+   <button style="top: 0" id="XY Grid" class="ui">XY GRID</button>
+  <button style="top: 50" id="YZ Grid" class="ui">YZ GRID</button>
+  <button style="top: 100" id="XZ Grid" class="ui">XZ GRID</button>
+  <button style="top: 150" id="Change" class="ui">2D</button>
+  <button style="top: 200" id="Rotate" class="ui">Rotate the Shape</button>
+  <button style="top: 250" id="Delete" class="ui">Delete the Shape</button>
+  <button style="top: 300" id="Delete" class="ui">Add the Shape</button>
+  <button style="top: 350" id="ADD" class="ui">ADD</button>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+    <div class="columns is-centered is-variable is-1-mobile is-flex is-flex-wrap-wrap workspace">
+        <div id="left" class="column has-text-centered is-2-desktop is-5-tablet is-5-mobile apparatus">
+            <div class="v-datalist-container">
+                <div class="v-datalist-title">Display Settings</div>
+
+                    <p style="align-self:flex-start;"> 
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox1" onclick="checkbox1()">
+                           <span style="font-size: x-small;">3D </span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox2" onclick="checkbox2()">
+                        <span style="font-size: x-small;">Lock Vertices </span>
+                    </label>
+                    </p>
+
+                    <p style="align-self:flex-start;">
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox3" onclick="checkbox3()">
+                        <span style="font-size: x-small;">Show Animation </span>
+                    </label>
+                    </p>
+                
+                    <p style="align-self: flex-start ">
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox4" onclick="checkbox4()">
+                        <span style="font-size:x-small;">Transform Axes </span>
+                    </label>
+
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox5" onclick="checkbox5()">
+                        <span style="font-size:x-small;">XY-Grid </span>
+                    </p>
+                    
+                    <p style="align-self: flex-start ">
+                        <label class="checkbox">
+                            <input type="checkbox" id="checkbox6" onclick="checkbox6()">
+                            <span style="font-size:x-small;">YZ-Grid </span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" id="checkbox7" onclick="checkbox7()">
+                            <span style="font-size:x-small;">XZ-Grid </span>
+                        </label>
+                    </p>
+
+                    <div class="v-datalist-title" id="top-border">Camera Options</div>
+                    <p>
+                    <!-- <div class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            Add here
+                        </div>
+                        <button class="modal-close is-small" aria-label="close"></button>
+                    </div> -->
+                    <a class="button is-small is-responsive is-outlined is-info" id="add-shape" onclick="addShape()">Add</a>
+                    <a class="button is-small is-responsive is-outlined is-success" id="edit-shape" onclick="editShape()">Edit</a>
+                    <a class="button is-small is-responsive is-danger is-outlined" id="delete-shape" onclick="deleteShape()">Delete</a>
+                    <a class="button is-small is-responsive is-info  is-outlined" id="new-cam" onclick="newCam()">New Cam</a>
+                    </p>
+
+                    <div class="v-datalist-title" id="top-border">Description</div>
+            </div>
+        </div>
+        
+        <div class="column has-text-centered is-8-desktop is-10-tablet is-10-mobile exp" id="hello">
+            <!-- <canvas id="mainC" class="v-canvas-container"></canvas> -->
+        </div>
+
+      <div id="observations" class="column has-text-centered is-2-desktop is-5-tablet is-5-mobile right">
+        <div class="v-datalist-container">
+            <div class="v-datalist-title">World and Instances</div>
+            <div class="v-datalist-row v-bold" id="output1"></div>
+            <div class="v-datalist-row v-bold" id="output2"></div>
+            <div class="v-datalist-row">
+                <div class="v-table-wrap">
+                    <table id="table" class="table is-bordered is-fullwidth">
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div> 
+
+  
+    <!-- <script>
+        instance = THREE.getInstance();
+        instance.setContainer("hello");
+    </script> -->
+    <script src="https://unpkg.com/mathjs@9.2.0/lib/browser/math.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
+
 </html>
