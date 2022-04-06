@@ -8,6 +8,7 @@ import { AddCam, OldCam } from "./js/camera.js";
 import { createCube, createDodecahedron, createOctahedron, createTetrahedron } from "./js/shapes.js";
 import { ProjectTo2D } from "./js/2dprojection.js";
 import { Dot } from "./js/point.js";
+// import { scene, camera, orbit, renderer, shapes, grid1, grid2, grid3, dragx, dragy, dragz, two_geometry, two_plane, first_time, is_2D, arrowHelper } from "./js/global_vars.js";
 
 const move_button = document.getElementById("move-button");
 const modalbutton1 = document.querySelector(".buttonisprimary");
@@ -31,18 +32,13 @@ let scene,
     shapes = [],
     rot = 0.01,
     variable = 0,
-    vargrid1 = 0,
-    vargrid2 = 0,
-    vargrid3 = 0,
     grid1 = [],
     grid2 = [],
     grid3 = [],
     dragx = [],
     dragy = [],
     dragz = [],
-    xcor = 3,
-    ycor = 3,
-    zcor = 3,
+    initial_pos = [3,3,3],
     lock = 0,
     dir = [],
     scale = 1,
@@ -87,22 +83,18 @@ window.onclick = function(event) {
     }
 }
 
-
-
-
 // Section of Checkboxes
 // --------------------------------------------------------------------------------------------------
 // 2D
 threeD.addEventListener("click", () => {
     if (threeD.checked) {
-        //
+        ProjectTo2D(camera, orbit, is_2D, two_plane, first_time, two_geometry);
     } else {
         //
     }
 });
 
 // lock vertices
-
 lock_vertices.addEventListener("click", () => {
     if (lock_vertices.checked) {
         lock = 1;
@@ -185,21 +177,17 @@ let buttons = document.getElementsByTagName("button");
 const size = 50;
 const divisions = 25;
 
-var camera2, scene2, controls;
-
-
 function NewCam(event) {
     // function AddCam ( near, far, left, right, bottom, top, camera_pos, target, up_vec, ortho_persp ) {
     // AddCam(0.1, 1000, -10, -10, -10, 10, new THREE.Vector3(7,-6,2), new THREE.Vector3(1,1,1), new THREE.Vector3(1,0,1), 0);
     AddCam(0.01, 100, -3.2, 3.2, -2.4, 2.4, new THREE.Vector3(3, 5, 2), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 1, 0), 1);
-
 }
 
 document.getElementById("new-cam").onclick = function() {
     // function AddCam ( near, far, left, right, bottom, top, camera_pos, target, up_vec, ortho_persp ) {
     // AddCam(0.1, 1000, -10, -10, -10, 10, new THREE.Vector3(7,-6,2), new THREE.Vector3(1,1,1), new THREE.Vector3(1,0,1), 0);
     // AddCam(0.01, 100, -3.2, 3.2, -2.4, 2.4, new THREE.Vector3(3,5,2), new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0), 1);
-    alert("hi");
+
     let near = document.getElementById("near-coord").value;
     let far = document.getElementById("far-coord").value;
     let left = document.getElementById("left-coord").value;
@@ -214,7 +202,7 @@ document.getElementById("new-cam").onclick = function() {
     let camtype = document.getElementById("cam-type").value;
 
     // debug
-    console.log(near, far, left, right, top, bottom, camera_pos, target, up_vec, parseInt(camtype));
+    // console.log(near, far, left, right, top, bottom, camera_pos, target, up_vec, parseInt(camtype));
 
     AddCam(parseFloat(near), parseFloat(far), parseFloat(left), parseFloat(right), parseFloat(top), parseFloat(bottom), camera_pos, target, up_vec, parseInt(camtype));
 }
@@ -314,23 +302,30 @@ function ondblclick(event) {
                     // alert(document.querySelector("select").value);
                     no_of_shapes++;
                     if (document.querySelector("select").value === "Cube") {
-                        createCube(xcoord, ycoord, zcoord);
-                        // createCube(xcoord, ycoord, zcoord);
+                        createCube(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
                     }
                     if (document.querySelector("select").value === "Tetrahedron") {
-                        createTetrahedron(xcoord, ycoord, zcoord);
+                        createTetrahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
                     }
                     if (document.querySelector("select").value === "Octahedron") {
-                        createOctahedron(xcoord, ycoord, zcoord);
+                        createOctahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
                     }
                     if (document.querySelector("select").value === "Dodecahedron") {
-                        createDodecahedron(xcoord, ycoord, zcoord);
+                        createDodecahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
                     }
                     document.getElementById("edit-modal").style.display = "none";
                 });
         };
     }
 }
+
+document.getElementById("h-s").onchange = function() {
+    scale = document.getElementById("h-s").value;
+
+    document.getElementById("h-x").value = document.getElementById("quantityx").value * scale;
+    document.getElementById("h-y").value = document.getElementById("quantityy").value * scale;
+    document.getElementById("h-z").value = document.getElementById("quantityz").value * scale;
+};
 
 span_edit_modal.onclick = function() {
     modal_edit.style.display = "none";
@@ -363,24 +358,22 @@ document.addEventListener("pointermove", (event) => {
             planeIntersect.y + shift.y,
             planeIntersect.z + shift.z
         );
-        scale = document.getElementById("h-s").value;
-        let c_x = document.getElementById("quantityx").value = ((dot_list[0].position.x + xcor) * scale).toFixed(2);
-        let c_y = document.getElementById("quantityy").value = ((dot_list[0].position.y + ycor) * scale).toFixed(2);
-        let c_z = document.getElementById("quantityz").value = ((dot_list[0].position.z + zcor) * scale).toFixed(2);
+        document.getElementById("quantityx").value = ((dot_list[0].position.x + initial_pos[0]) * scale).toFixed(2);
+        document.getElementById("quantityy").value = ((dot_list[0].position.y + initial_pos[1]) * scale).toFixed(2);
+        document.getElementById("quantityz").value = ((dot_list[0].position.z + initial_pos[2]) * scale).toFixed(2);
 
-        let h_x = c_x * scale;
-        let h_y = c_y * scale;
-        let h_z = c_z * scale;
+        let c_x = document.getElementById("quantityx").value * scale;
+        let c_y = document.getElementById("quantityy").value * scale;
+        let c_z = document.getElementById("quantityz").value * scale;
 
-        document.getElementById("h-x").value = h_x.toFixed(2);
-        document.getElementById("h-y").value = h_y.toFixed(2);
-        document.getElementById("h-z").value = h_z.toFixed(2);
+        document.getElementById("h-x").value = c_x.toFixed(2);
+        document.getElementById("h-y").value = c_y.toFixed(2);
+        document.getElementById("h-z").value = c_z.toFixed(2);
     }
 
 });
 
 // mouse click
-
 document.addEventListener("pointerdown", () => {
     switch (event.which) {
         case 1:
@@ -398,8 +391,8 @@ document.addEventListener("pointerdown", () => {
             break;
     }
 });
-// mouse release
 
+// mouse release
 document.addEventListener("pointerup", () => {
     isDragging = false;
     dragObject = null;
@@ -411,38 +404,21 @@ move_button.addEventListener("click", () => {
     let y = document.getElementById("quantityy").value;
     let z = document.getElementById("quantityz").value;
     console.log(x, y, z);
-    dot_list[0].position.set(x - xcor, y - ycor, z - zcor);
-});
-move_button.addEventListener("click", () => {
-    let x = document.getElementById("quantityx").value;
-    let y = document.getElementById("quantityy").value;
-    let z = document.getElementById("quantityz").value;
-    console.log(x, y, z);
-    dot_list[0].position.set(x - xcor, y - ycor, z - zcor);
-});
+    dot_list[0].position.set(x - initial_pos[0], y - initial_pos[1], z - initial_pos[2]);
 
+    document.getElementById("h-x").value = x * scale;
+    document.getElementById("h-y").value = y * scale;
+    document.getElementById("h-z").value = z * scale;
+});
+//------------------------------------------------------------------
 
+// Creating scene
 scene = new THREE.Scene();
-// scene.background = new THREE.Color(0x36393e);
 scene.background = new THREE.Color(0x121212);
-camera = new THREE.PerspectiveCamera(
-    30,
-    window.innerWidth / window.innerHeight,
-    1,
-    1000
-);
-// Materials Function
+camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
 
-// Geometries Function
-function createGeometries() {
-    const cube = new THREE.BoxGeometry(1, 1, 1);
-    return {
-        cube,
-    };
-}
 // Main Function
 // --------------------------------------------------------------------------------------------------
-
 let init = function() {
     camera.position.z = 5;
     camera.position.x = 2;
@@ -467,7 +443,7 @@ let init = function() {
     for (let i = 0; i < 6; i++) {
         scene.add(arrowHelper[i]);
     }
-    let PointGeometry = Dot(scene, dot_list, xcor, ycor, zcor);
+    let PointGeometry = Dot(scene, dot_list, initial_pos);
     renderer = new THREE.WebGLRenderer();
     let container = document.getElementById("canvas-main");
     let w = container.offsetWidth;
@@ -484,15 +460,6 @@ let init = function() {
     orbit.enableDamping = true;
 };
 let mainLoop = function() {
-    //console.log(scene.children);
-    if (variable === 1) {
-        for (let cub of cube) {
-            cub.rotation.y += rot;
-            if (cub.position.x <= -3 || cub.position.x >= 3) rot *= -1;
-        }
-    }
-
-    // orbit.update();
     renderer.render(scene, camera);
     requestAnimationFrame(mainLoop);
 };
