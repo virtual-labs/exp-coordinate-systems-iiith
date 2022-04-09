@@ -4,10 +4,10 @@ import { MOUSE } from "https://unpkg.com/three@0.128.0/build/three.module.js";
 
 // importing internal files
 // import { createMaterials } from "./exp1/materials.js";
-import { AddCam, OldCam } from "js/camera.js";
+import { AddCam, OldCam } from "./js/camera.js";
 import { createCube, createDodecahedron, createOctahedron, createTetrahedron } from "./js/shapes.js";
-import { ProjectTo2D } from "js/2dprojection.js";
-import { Dot } from "js/point.js";
+import { ProjectTo2D } from "./js/2dprojection.js";
+import { Dot } from "./js/point.js";
 // import { scene, camera, orbit, renderer, shapes, grid1, grid2, grid3, dragx, dragy, dragz, two_geometry, two_plane, first_time, is_2D, arrowHelper } from "./js/global_vars.js";
 
 const move_button = document.getElementById("move-button");
