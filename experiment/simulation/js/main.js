@@ -1,467 +1,288 @@
-import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
-import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js";
-import { MOUSE } from "https://unpkg.com/three@0.128.0/build/three.module.js";
+<!DOCTYPE html>
+<html>
 
-// importing internal files
-// import { createMaterials } from "./exp1/materials.js";
-import { AddCam, OldCam } from "./js/camera.js";
-import { createCube, createDodecahedron, createOctahedron, createTetrahedron } from "./js/shapes.js";
-import { ProjectTo2D } from "./js/2dprojection.js";
-import { Dot } from "./js/point.js";
-// import { scene, camera, orbit, renderer, shapes, grid1, grid2, grid3, dragx, dragy, dragz, two_geometry, two_plane, first_time, is_2D, arrowHelper } from "./js/global_vars.js";
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.5-b/css/style.min.css">
+    <link rel="stylesheet" href="exp1main.css">
+</head>
 
-const move_button = document.getElementById("move-button");
-const modalbutton1 = document.querySelector(".buttonisprimary");
-const modalbutton2 = document.querySelector(".buttonissecondary");
-let threeD = document.getElementById("3d-toggle-cb");
-let lock_vertices = document.getElementById("lock-vertices-cb");
-let transform_axes = document.getElementById("transform-axes-cb");
-let xy_grid = document.getElementById("xy-grid-cb");
-let yz_grid = document.getElementById("yz-grid-cb");
-let xz_grid = document.getElementById("xz-grid-cb");
+<body class="page">
+    </br>
 
-let modal_add = document.getElementById("add-modal");
-let modal_edit = document.getElementById("edit-modal");
+    <div class="columns is-centered is-flex">
+        <div class="column has-text-centered">
+            <div class="v-instruction-container">
+                <div class="v-instruction-title">Instructions</div>
+                <div id="procedure-message" class="v-instruction-text">
+                    <li style="font-size: 0.9rem;">
+                        This experiment explains how points and co-ordinate systems are used together to represent two and three dimensional shapes.
+                    </li>
+                    <li style="font-size: 0.9rem;">
+                        This experiment is designed to teach how points and co-ordinate systems are represented in computer graphics. Start by editing the co-ordinates of the point and comparing how the point gets displayed. The co-ordinates can be edited by changing the text
+                        boxes above Also notice how the absolute co-ordinates are displayed.
+                    </li>
+                    <li style="font-size: 0.9rem;">
+                        Drag with the right mouse button to rotate the view and use the mouse wheel to zoom in and out.
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
 
-let span_edit_modal = document.getElementsByClassName("close")[0];
-let deletebutton = document.getElementById("deletebutton");
-let scene,
-    camera,
-    renderer,
-    orbit,
-    shapes = [],
-    rot = 0.01,
-    variable = 0,
-    grid1 = [],
-    grid2 = [],
-    grid3 = [],
-    dragx = [],
-    dragy = [],
-    dragz = [],
-    initial_pos = [3,3,3],
-    lock = 0,
-    dir = [],
-    scale = 1,
-    two_plane,
-    two_geometry,
-    first_time = 1,
-    is_2D = 0,
-    arrowHelper = [];
+    <div class="columns is-centered is-variable is-1-mobile is-flex is-flex-wrap-wrap workspace">
+        <div id="left" class="column has-text-centered is-2-desktop is-5-tablet is-5-mobile apparatus">
+            <div class="v-datalist-container">
+                <div class="v-datalist-title">Display Settings</div>
 
+                <p style="align-self:flex-start;">
+                    <label class="checkbox">
+                        <input type="checkbox" id="3d-toggle-cb">
+                        <span style="font-size: x-small;">2D </span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="lock-vertices-cb">
+                        <span style="font-size: x-small;">Lock Vertices </span>
+                    </label>
+                </p>
 
-// Modal controls for Add Shape Button
-let addModal = document.getElementById("add-modal");
-let span_add_modal = document.getElementsByClassName("close")[1];
+                <p style="align-self: flex-start ">
+                    <label class="checkbox">
+                        <input type="checkbox" id="transform-axes-cb">
+                        <span style="font-size:x-small;">Transform Axes </span>
+                    </label>
 
-span_add_modal.onclick = function() {
-    addModal.style.display = "none";
-}
+                    <label class="checkbox">
+                        <input type="checkbox" id="xy-grid-cb" >
+                        <span style="font-size:x-small;">XY-Grid </span>
+                </p>
 
-window.onclick = function(event) {
-    if (event.target === Addmodal) {
-        addModal.style.display = "none";
-    }
-}
+                <p style="align-self: flex-start ">
+                    <label class="checkbox">
+                        <input type="checkbox" id="yz-grid-cb">
+                        <span style="font-size:x-small;">YZ-Grid </span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="xz-grid-cb">
+                        <span style="font-size:x-small;">XZ-Grid </span>
+                    </label>
+                </p>
 
-// Modal controls for Add Camera Button
-let camModal = document.getElementById("cam-modal");
-let camBtn = document.getElementById("new-cam-btn");
+                <div class="v-datalist-title" id="top-border">Camera Options</div>
+                <p>
+                    <button id="add-shape-btn" style="margin:0.25rem;" class="button is-small is-responsive is-info" onclick="addShape()">Add</button>
+                    <button id="edit-shape-btn" style="margin:0.25rem;" class="button is-small is-responsive  is-success" onclick="editShape()">Edit</button>
+                    <button id="delete-shape-btn" style="margin:0.25rem;" class="button is-small is-responsive  is-danger" onclick="deleteShape()">Delete</button>
+                    <button id="new-cam-btn" style="margin:0.25rem;" class="button is-small is-responsive is-info" onclick="new_cam()">New
+                            Cam</button>
 
-let span_new_cam = document.getElementsByClassName("close")[4];
+                    <div id="edit-modal" class="modal is-responsive">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>
+                                <input class="input" style="width:auto; float: left;" id="name" type="text" placeholder="Instance Name">
+                                <div id="Addshape" class="control" value="hi">
+                                    <div class="select" style="float:left;">
+                                        <select name="" id="shape-edit-dropdown" value="dropdown">
+                                    <option value="Tetrahedron">Tetrahedron</option>
+                                    <option value="Octahedron">Octahedron</option>
+                                    <option value="Dodecahedron">Dodecahedron</option>
+                                    <option value="Cube">Cube</option>
+                                    <option value="Sphere">Sphere</option>
+                                </select>
+                                    </div>
+                                </div>
+                                </br>
+                                </br>
 
-camBtn.onclick = function() {
-    camModal.style.display = "block";
-}
+                                <input class="input " style="width: 200px; float:left" id="x" type="number" placeholder="X" step=".01" value="0">
+                                <input class="input " style="width: 200px; float:left" id="y" type="number" placeholder="Y" step=".01" value="0">
+                                <input class="input " style="width: 200px; float:left" id="z" type="number" placeholder="Z" step=".01" value="0">
 
-span_new_cam.onclick = function() {
-    camModal.style.display = "none";
-}
+                                </br>
+                                </br>
+                                <p style="text-align: left;">Co-ordinate System (Global by default):
+                                    <button class="button is-small  is-outlined is-success" style="float:inline-end; width: 20px; height: 20px;" onclick="CS_popup()">Add</button>
 
-window.onclick = function(event) {
-    if (event.target === camModal) {
-        camModal.style.display = "none";
-    }
-}
+                                    <p style="text-align: left;">Transformation (Global by default):
+                                        <button class="button is-small  is-outlined is-success" style="float:inline-end; width: 20px; height: 20px;" onclick="Transformation_popup()">Add</button>
 
-// Section of Checkboxes
-// --------------------------------------------------------------------------------------------------
-// 2D
-threeD.addEventListener("click", () => {
-    if (threeD.checked) {
-        ProjectTo2D(camera, orbit, is_2D, two_plane, first_time, two_geometry);
-    } else {
-        //
-    }
-});
+                                        <div class="control">
+                                            <button class="buttonisprimary" style="width: 200px; float:left">Edit</button>
+                                        </div>
+                                    </p>
+                        </div>
 
-// lock vertices
-lock_vertices.addEventListener("click", () => {
-    if (lock_vertices.checked) {
-        lock = 1;
-        //console.log("hello");
-        orbit.mouseButtons = {
-            LEFT: MOUSE.PAN,
-            MIDDLE: MOUSE.DOLLY,
-            RIGHT: MOUSE.ROTATE,
-        };
-        orbit.target.set(0, 0, 0);
-        orbit.enableDamping = true;
-    } else {
-        lock = 0;
-        orbit.mouseButtons = {
-            //  LEFT: MOUSE.PAN,
-            MIDDLE: MOUSE.DOLLY,
-            RIGHT: MOUSE.ROTATE,
-        };
-        orbit.target.set(0, 0, 0);
-        orbit.enableDamping = true;
-        //
-    }
-});
+                    </div>
 
-// Transformation
-transform_axes.addEventListener("click", () => {
-    if (transform_axes.checked) {
-        //
-    } else {
-        //
-    }
-});
+                    <div id="add-modal" class="modal is-responsive">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>
+                                <input class="input" style="width:auto; float: left;" id="nam" type="text" placeholder="Instance Name">
+                                <div id="ShapeAdd" class="control">
+                                    <div class="select" style="float:left;">
+                                        <select name="" id="shape-add-dropdown" value="dropdown">
+                                    <option value="Tetrahedron">Tetrahedron</option>
+                                    <option value="Octahedron">Octahedron</option>
+                                    <option value="Dodecahedron">Dodecahedron</option>
+                                    <option value="Cube">Cube</option>
+                                    <option value="Sphere">Sphere</option>
+                                </select>
+                                    </div>
+                                </div>
+                                </br>
+                                </br>
 
-// XY Grid
-xy_grid.addEventListener("click", () => {
-    if (xy_grid.checked) {
-        var grid = new THREE.GridHelper(size, divisions);
-        var vector3 = new THREE.Vector3(0, 0, 1);
-        grid.lookAt(vector3);
-        grid1.push(grid);
-        scene.add(grid1[0]);
-    } //
-    else {
-        scene.remove(grid1[0]);
-        grid1.pop();
-    }
-});
-// XZ Grid
-xz_grid.addEventListener("click", () => {
-    if (xz_grid.checked) {
-        var grid = new THREE.GridHelper(size, divisions);
-        grid.geometry.rotateZ(Math.PI / 2);
-        grid3.push(grid);
-        scene.add(grid3[0]);
-    } else {
-        scene.remove(grid3[0]);
-        grid3.pop();
-        //
-    }
-});
-// YZ Grid
-yz_grid.addEventListener("click", () => {
-    if (yz_grid.checked) {
-        var grid = new THREE.GridHelper(size, divisions);
-        var vector3 = new THREE.Vector3(0, 1, 0);
-        grid.lookAt(vector3);
-        grid2.push(grid);
-        scene.add(grid2[0]);
-    } else {
-        scene.remove(grid2[0]);
-        grid2.pop();
-        //
-    }
-});
+                                <input class="input " style="width: 100px; float:left" id="x1" type="number" placeholder="X" step=".01" value="0">
+                                <input class="input " style="width: 100px; float:left" id="y1" type="number" placeholder="Y" step=".01" value="0">
+                                <input class="input " style="width: 100px; float:left" id="z1" type="number" placeholder="Z" step=".01" value="0">
 
-// Section of Buttons
-// --------------------------------------------------------------------------------------------------
+                                </br>
+                                </br>
+                                <p style="text-align: left;">Co-ordinate System (Global by default):
+                                    <button class="button is-small  is-outlined is-success" style="float:inline-end; width: 20px; height: 20px;" onclick="CS_popup()">Add</button>
 
-let buttons = document.getElementsByTagName("button");
-const size = 50;
-const divisions = 25;
+                                    <p style="text-align: left;">Transformation (Global by default):
+                                        <button class="button is-small  is-outlined is-success" style="float:inline-end; width: 20px; height: 20px;" onclick="Transformation_popup()">Add</button>
 
-function NewCam(event) {
-    // function AddCam ( near, far, left, right, bottom, top, camera_pos, target, up_vec, ortho_persp ) {
-    // AddCam(0.1, 1000, -10, -10, -10, 10, new THREE.Vector3(7,-6,2), new THREE.Vector3(1,1,1), new THREE.Vector3(1,0,1), 0);
-    AddCam(0.01, 100, -3.2, 3.2, -2.4, 2.4, new THREE.Vector3(3, 5, 2), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 1, 0), 1);
-}
+                                        <div class="control">
+                                            <button class="buttonissecondary" style="width: 200px; float:left">ADD</button>
+                                        </div>
+                                    </p>
+                        </div>
 
-document.getElementById("new-cam").onclick = function() {
-    // function AddCam ( near, far, left, right, bottom, top, camera_pos, target, up_vec, ortho_persp ) {
-    // AddCam(0.1, 1000, -10, -10, -10, 10, new THREE.Vector3(7,-6,2), new THREE.Vector3(1,1,1), new THREE.Vector3(1,0,1), 0);
-    // AddCam(0.01, 100, -3.2, 3.2, -2.4, 2.4, new THREE.Vector3(3,5,2), new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0), 1);
+                    </div>
 
-    let near = document.getElementById("near-coord").value;
-    let far = document.getElementById("far-coord").value;
-    let left = document.getElementById("left-coord").value;
-    let right = document.getElementById("right-coord").value;
-    let bottom = document.getElementById("bottom-coord").value;
-    let top = document.getElementById("top-coord").value;
+                    <div id="EditModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Edit shapes</p>
+                        </div>
 
-    let camera_pos = new THREE.Vector3(document.getElementById("cam-x").value, document.getElementById("cam-y").value, document.getElementById("cam-z").value);
-    let target = new THREE.Vector3(document.getElementById("target-x").value, document.getElementById("target-y").value, document.getElementById("target-z").value);
-    let up_vec = new THREE.Vector3(document.getElementById("up-x").value, document.getElementById("up-y").value, document.getElementById("up-z").value);
-    // let ortho_persp = document.getElementById("ortho-id").value;
-    let camtype = document.getElementById("cam-type").value;
+                    </div>
 
-    // debug
-    // console.log(near, far, left, right, top, bottom, camera_pos, target, up_vec, parseInt(camtype));
+                    <div id="DeleteModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Delete shapes</p>
+                        </div>
 
-    AddCam(parseFloat(near), parseFloat(far), parseFloat(left), parseFloat(right), parseFloat(top), parseFloat(bottom), camera_pos, target, up_vec, parseInt(camtype));
-}
+                    </div>
 
+                    <div id="cam-modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>
+                                <div class="control">
+                                    <p>Clipping</p>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="near-coord" placeholder="Near">
+                                        <input class="input is-small" style="width:20%" type="text" id="far-coord" placeholder="Far">
+                                    </div>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="left-coord" placeholder="Left">
+                                        <input class="input is-small" style="width:20%" type="text" id="right-coord" placeholder="Right">
+                                    </div>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="top-coord" placeholder="Top">
+                                        <input class="input is-small" style="width:20%" type="text" id="bottom-coord" placeholder="Bottom">
+                                    </div>
+                                    <p>Camera Position</p>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="cam-x" placeholder="Cam-X">
+                                        <input class="input is-small" style="width:20%" type="text" id="cam-y" placeholder="Cam-Y">
+                                        <input class="input is-small" style="width:20%" type="text" id="cam-z" placeholder="Cam-Z">
+                                    </div>
+                                    <p>Target Position</p>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="target-x" placeholder="Target-X">
+                                        <input class="input is-small" style="width:20%" type="text" id="target-y" placeholder="Target-Y">
+                                        <input class="input is-small" style="width:20%" type="text" id="target-z" placeholder="Target-Z">
+                                    </div>
+                                    <p>Up Vector</p>
+                                    <div style="display: flexbox;">
+                                        <input class="input is-small" style="width:20%" type="text" id="up-x" placeholder="Up-X">
+                                        <input class="input is-small" style="width:20%" type="text" id="up-y" placeholder="Up-Y">
+                                        <input class="input is-small" style="width:20%" type="text" id="up-z" placeholder="Up-Z">
+                                    </div>
+                                    <p>Type</p>
+                                    <!-- <div id ="camera-type" class="control" value="1"> -->
+                                    <div id="ortho-id" class="select" style="float:left;">
+                                        <select id="cam-type" name="" value="1">
+                                          <option value="1">Orthographic</option>
+                                          <option value="0">Perspective</option>
+                                        </select>
+                                    </div>
+                                    <!-- </div> -->
+                                    <div class="control">
+                                        <button class="button is-link" id="new-cam">Submit</button>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
 
+                    </div>
 
-document.getElementById("add-shape-btn").onclick = function() {
-    modal_add.style.display = "block";
-    modalbutton2.addEventListener("click", () => {
-        let xcoord = document.getElementById("x1").value;
-        let ycoord = document.getElementById("y1").value;
-        let zcoord = document.getElementById("z1").value;
-        // alert(document.getElementById("hi").value);
-        no_of_shapes++;
-        console.log(document.getElementById("shape-add-dropdown").value);
-        if (document.querySelector("select").value == "Cube") {
-            createCube(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-        }
-        if (document.querySelector("select").value == "Tetrahedron") {
-            createTetrahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-        }
-        if (document.querySelector("select").value == "Octahedron") {
-            createOctahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-        }
-        if (document.querySelector("select").value == "Dodecahedron") {
-            createDodecahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-        }
-        modal_add.style.display = "none";
-    });
-};
+                    </p>
 
-// Section of mouse control functions
-// --------------------------------------------------------------------------------------------------
+                    <div class="v-datalist-title" id="top-border">Point Co-ordinates</div>
 
-let raycaster = new THREE.Raycaster();
-let raycaster1 = new THREE.Raycaster();
-let mouse = new THREE.Vector2();
-let plane = new THREE.Plane();
-let pNormal = new THREE.Vector3(0, 1, 0); // plane's normal
+                    <div style="display: flexbox;">
+                        X:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="quantityx" value="3" placeholder="X"> Y:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="quantityy" value="3" placeholder="Y"> Z:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="quantityz" value="3" placeholder="Z">
+                    </div>
+                    <input class="button is-responsive is-small is-link" style="margin: 2px;" id="move-button" type="submit" value="Move">
 
-let planeIntersect = new THREE.Vector3(); // point of intersection with the plane
-let pIntersect = new THREE.Vector3(); // point of intersection with an object (plane's point)
-let shift = new THREE.Vector3(); // distance between position of an object and points of intersection with the object
-let isDragging = false;
-let dragObject;
-let point = [];
-let shapevertex = [];
-let dot_list = [];
-let no_of_shapes = 0;
+                    <div class="v-datalist-title" id="top-border">World and Instances</div>
 
-document.addEventListener("dblclick", ondblclick, false);
-// double click
-function ondblclick(event) {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster1.setFromCamera(mouse, camera);
-    let intersects = raycaster1.intersectObjects(shapes);
-    if (intersects.length > 0) {
-        console.log(
-            intersects[0].object.position.x,
-            intersects[0].object.position.y,
-            intersects[0].object.position.z
-        );
-        const geometry = new THREE.SphereGeometry(1, 32, 16);
-        const edges = new THREE.EdgesGeometry(geometry);
-        const line = new THREE.LineSegments(
-            edges,
-            new THREE.LineBasicMaterial({ color: 0xffffff })
-        );
-        line.position.set(
-            intersects[0].object.position.x,
-            intersects[0].object.position.y,
-            intersects[0].object.position.z
-        );
-        scene.add(line);
-        document.getElementById("delete-shape-btn").onclick = function() {
-            scene.remove(line);
-            for (let i = 0; i < intersects.length; i++) {
-                scene.remove(intersects[i].object);
-                no_of_shapes--;
-                console.log(no_of_shapes);
-            }
-        };
-        // geometry.translate(intersects[0].object.position.x,intersects[0].object.position.y,intersects[0].object.position.z);
-        document.getElementById("edit-shape-btn").onclick = function() {
-            document.getElementById("edit-modal").style.display = "block";
-            document
-                .querySelector(".buttonisprimary")
-                .addEventListener("click", () => {
-                    for (let i = 0; i < intersects.length; i++) {
-                        scene.remove(intersects[i].object);
-                        scene.remove(line);
-                    }
-                    var xcoord = document.getElementById("x").value;
-                    var ycoord = document.getElementById("y").value;
-                    var zcoord = document.getElementById("z").value;
-                    // alert(document.querySelector("select").value);
-                    no_of_shapes++;
-                    if (document.querySelector("select").value === "Cube") {
-                        createCube(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-                    }
-                    if (document.querySelector("select").value === "Tetrahedron") {
-                        createTetrahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-                    }
-                    if (document.querySelector("select").value === "Octahedron") {
-                        createOctahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-                    }
-                    if (document.querySelector("select").value === "Dodecahedron") {
-                        createDodecahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
-                    }
-                    document.getElementById("edit-modal").style.display = "none";
-                });
-        };
-    }
-}
-
-document.getElementById("h-s").onchange = function() {
-    scale = document.getElementById("h-s").value;
-
-    document.getElementById("h-x").value = document.getElementById("quantityx").value * scale;
-    document.getElementById("h-y").value = document.getElementById("quantityy").value * scale;
-    document.getElementById("h-z").value = document.getElementById("quantityz").value * scale;
-};
-
-span_edit_modal.onclick = function() {
-    modal_edit.style.display = "none";
-};
-// mouse drag
-
-document.addEventListener("pointermove", (event) => {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
-    if (isDragging && lock === 0) {
-        //console.log("Why");
-        for (let i = 0; i < shapes.length; i++) {
-            raycaster.ray.intersectPlane(plane, planeIntersect);
-            shapes[i].geometry.vertices[0].set(
-                planeIntersect.x + shift.x,
-                planeIntersect.y + shift.y,
-                planeIntersect.z + shift.z
-            );
-            shapes[i].geometry.verticesNeedUpdate = true;
-            shapevertex[i].position.set(
-                planeIntersect.x + shift.x - dragx[i],
-                planeIntersect.y + shift.y - dragy[i],
-                planeIntersect.z + shift.z - dragz[i]
-            );
-        }
-        raycaster.ray.intersectPlane(plane, planeIntersect);
-        dot_list[0].position.set(
-            planeIntersect.x + shift.x,
-            planeIntersect.y + shift.y,
-            planeIntersect.z + shift.z
-        );
-        document.getElementById("quantityx").value = ((dot_list[0].position.x + initial_pos[0]) * scale).toFixed(2);
-        document.getElementById("quantityy").value = ((dot_list[0].position.y + initial_pos[1]) * scale).toFixed(2);
-        document.getElementById("quantityz").value = ((dot_list[0].position.z + initial_pos[2]) * scale).toFixed(2);
-
-        let c_x = document.getElementById("quantityx").value * scale;
-        let c_y = document.getElementById("quantityy").value * scale;
-        let c_z = document.getElementById("quantityz").value * scale;
-
-        document.getElementById("h-x").value = c_x.toFixed(2);
-        document.getElementById("h-y").value = c_y.toFixed(2);
-        document.getElementById("h-z").value = c_z.toFixed(2);
-    }
-
-});
-
-// mouse click
-document.addEventListener("pointerdown", () => {
-    switch (event.which) {
-        case 1:
-            //  Left mouse button pressed
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-            pNormal.copy(camera.position).normalize();
-            plane.setFromNormalAndCoplanarPoint(pNormal, scene.position);
-            raycaster.setFromCamera(mouse, camera);
-            raycaster.ray.intersectPlane(plane, planeIntersect);
-            // shift.subVectors(point[0].position, planeIntersect);
-            shift.subVectors(dot_list[0].position, planeIntersect);
-            isDragging = true;
-            dragObject = shapes[shapes.length - 1];
-            break;
-    }
-});
-
-// mouse release
-document.addEventListener("pointerup", () => {
-    isDragging = false;
-    dragObject = null;
-});
+                    <div style="display: flexbox;">
+                        X:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="h-x" value="3" placeholder="X"> Y:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="h-y" value="3" placeholder="Y"> Z:
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="h-z" value="3" placeholder="Z"> Scaling Factor
+                        <input class="input is-responsive is-small" style="width:20%" type="number" id="h-s" value="1" step="0.01" placeholder="Scale">
+                    </div>
 
 
-move_button.addEventListener("click", () => {
-    let x = document.getElementById("quantityx").value;
-    let y = document.getElementById("quantityy").value;
-    let z = document.getElementById("quantityz").value;
-    console.log(x, y, z);
-    dot_list[0].position.set(x - initial_pos[0], y - initial_pos[1], z - initial_pos[2]);
+                    <div class="v-datalist-row v-bold" id="output1"></div>
+                    <div class="v-datalist-row v-bold" id="output2"></div>
+                    <div class="v-datalist-row">
+                        <div class="v-table-wrap">
+                            <table id="table" class="table is-bordered is-fullwidth">
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
 
-    document.getElementById("h-x").value = x * scale;
-    document.getElementById("h-y").value = y * scale;
-    document.getElementById("h-z").value = z * scale;
-});
-//------------------------------------------------------------------
 
-// Creating scene
-scene = new THREE.Scene();
-scene.background = new THREE.Color(0x121212);
-camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
+        <div class="column is-8-desktop is-10-tablet is-10-mobile exp">
+            <div class="v-canvas-container" id="canvas-main">
 
-// Main Function
-// --------------------------------------------------------------------------------------------------
-let init = function() {
-    camera.position.z = 5;
-    camera.position.x = 2;
-    camera.position.y = 2;
-    const gridHelper = new THREE.GridHelper(size, divisions);
-    const count = 1;
-    dir[0] = new THREE.Vector3(1, 0, 0);
-    dir[1] = new THREE.Vector3(0, 1, 0);
-    dir[2] = new THREE.Vector3(0, 0, 1);
-    dir[3] = new THREE.Vector3(-1, 0, 0);
-    dir[4] = new THREE.Vector3(0, -1, 0);
-    dir[5] = new THREE.Vector3(0, 0, -1);
-    //dir1.normalize();
-    const origin = new THREE.Vector3(0, 0, 0);
-    const length = 10;
-    arrowHelper[0] = new THREE.ArrowHelper(dir[0], origin, length, "red");
-    arrowHelper[1] = new THREE.ArrowHelper(dir[1], origin, length, "yellow");
-    arrowHelper[2] = new THREE.ArrowHelper(dir[2], origin, length, "blue");
-    arrowHelper[3] = new THREE.ArrowHelper(dir[3], origin, length, "red");
-    arrowHelper[4] = new THREE.ArrowHelper(dir[4], origin, length, "yellow");
-    arrowHelper[5] = new THREE.ArrowHelper(dir[5], origin, length, "blue");
-    for (let i = 0; i < 6; i++) {
-        scene.add(arrowHelper[i]);
-    }
-    let PointGeometry = Dot(scene, dot_list, initial_pos);
-    renderer = new THREE.WebGLRenderer();
-    let container = document.getElementById("canvas-main");
-    let w = container.offsetWidth;
-    let h = container.offsetHeight;
-    console.log(w, h);
-    renderer.setSize(w, h);
-    container.appendChild(renderer.domElement);
-    orbit = new OrbitControls(camera, renderer.domElement);
-    orbit.mouseButtons = {
-        MIDDLE: MOUSE.DOLLY,
-        RIGHT: MOUSE.ROTATE,
-    };
-    orbit.target.set(0, 0, 0);
-    orbit.enableDamping = true;
-};
-let mainLoop = function() {
-    renderer.render(scene, camera);
-    requestAnimationFrame(mainLoop);
-};
-init();
-mainLoop();
+            </div>
+        </div>
+
+
+        <!-- <div id="observations" class="column has-text-centered is-2-desktop is-5-tablet is-5-mobile right">
+            <div class="v-datalist-container">
+
+            </div>
+        </div> -->
+    </div>
+
+
+    <!-- <script>
+                                instance = THREE.getInstance();
+                                instance.setContainer("hello");
+                            </script> -->
+
+    <script src="https://unpkg.com/mathjs@9.2.0/lib/browser/math.js"></script>
+    <script type="module" src="exp1main.js"></script>
+</body>
+
+</html>
