@@ -1,3 +1,4 @@
+"use strict";
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 
 function vertexShader() {
@@ -36,4 +37,3 @@ export function createMaterials() {
         cubeShader,
     };
 }
-
