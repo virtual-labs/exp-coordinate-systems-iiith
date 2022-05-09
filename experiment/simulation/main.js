@@ -126,7 +126,6 @@ document.getElementById("add-shape-btn").onclick = function () {
     if (document.getElementById("shape-add-dropdown").value === "Cube") {
       createCube(xcoord, ycoord, zcoord, shapes, scene, point, shapeVertex
         , dragX, dragY, dragZ);
-      createCube(xcoord, ycoord, zcoord, shapes, scene, point, shapevertex, dragx, dragy, dragz);
     }
     if (document.getElementById("shape-add-dropdown").value === "Tetrahedron") {
       createTetrahedron(xcoord, ycoord, zcoord, shapes, scene, point, shapeVertex
