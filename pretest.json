@@ -1,0 +1,29 @@
+[
+{"question":" 1. <img src='images/quiz.png'><br/> Enter the points with brackets and a comman between. Ex. (5, -3)",
+"answers":{
+            "a":"answer1",
+            "b":"answer2",
+            "c":"answer3",
+            "d":"answer4"
+          },
+"correctAnswer":"a"},
+            
+{"question":"Q2. What is the point whose distance from XY plane is 3, YZ plane is -4 and XZ plane is 9 ?",
+"answers":{
+            "a":"(3, 0, -4)",
+            "b":"(-4, 3, 9)",
+            "c":"(-4, 9, 3)",
+            "d":"(-4, 9, 9)"
+          },
+"correctAnswer":"c"}, 
+
+{"question":" Q3. Convert the coordinate (12, 24, 42, 6) from homogeneous form to ordinary cartesian coordinates.  ?",
+"answers":{
+            "a":"(4, 2, 7)",
+            "b":"(7, 2, 4)",
+            "c":"(2, 4, 7)",
+            "d":"(2, 4, 4)"
+          },
+"correctAnswer":"c"}
+
+]
