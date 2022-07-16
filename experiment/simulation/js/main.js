@@ -13,7 +13,7 @@ const moveButton = document.getElementById("move-button");
 const lockVertices = document.getElementById("lock-vertices-cb");
 const modalAdd = document.getElementById("add-modal");
 const container = document.getElementById("canvas-main");
-const spanAddModal = document.getElementsByClassName("close")[1];
+const spanAddModal = document.getElementsByClassName("close")[0];
 const xyGrid = document.getElementById("xy-grid-cb");
 const yzGrid = document.getElementById("yz-grid-cb");
 const xzGrid = document.getElementById("xz-grid-cb");
@@ -150,7 +150,9 @@ spanAddModal.onclick = function () {
 lockVertices.addEventListener("click", () => {
   if (lockVertices.checked) {
     //  disable the drag controls
-    currentObject.userData.controls.enabled = false;
+    if (currentObject !== null) {
+      currentObject.userData.controls.enabled = false;
+    }
     orbit.mouseButtons = {
       LEFT: MOUSE.PAN,
       MIDDLE: MOUSE.DOLLY,
@@ -160,7 +162,10 @@ lockVertices.addEventListener("click", () => {
     orbit.enableDamping = true;
   } else {
     //  enable the frag controls
-    currentObject.userData.controls.enabled = true;
+
+    if (currentObject !== null) {
+      currentObject.userData.controls.enabled = true;
+    }
     orbit.mouseButtons = {
       MIDDLE: MOUSE.DOLLY,
       RIGHT: MOUSE.ROTATE,
@@ -244,12 +249,15 @@ let yzgrid = [];
 let scale = 1;
 let arrowHelper = [];
 
+camera.position.z = -5;
+camera.position.x = 2;
+camera.position.y = 2;
 scene.background = new THREE.Color(0x121212);
-
+const w = container.offsetWidth;
+const h = container.offsetHeight;
+renderer.setSize(w, h);
+container.appendChild(renderer.domElement);
 function init() {
-  camera.position.z = -5;
-  camera.position.x = 2;
-  camera.position.y = 2;
   const dir_x = new THREE.Vector3(1, 0, 0);
   const dir_y = new THREE.Vector3(0, 1, 0);
   const dir_z = new THREE.Vector3(0, 0, 1);
@@ -265,10 +273,6 @@ function init() {
   arrowHelper[4] = new THREE.ArrowHelper(negdir_y, origin, length, "yellow");
   arrowHelper[5] = new THREE.ArrowHelper(negdir_z, origin, length, "blue");
   arrowHelper.forEach((axis) => scene.add(axis));
-  const w = container.offsetWidth;
-  const h = container.offsetHeight;
-  renderer.setSize(w, h);
-  container.appendChild(renderer.domElement);
 
   orbit.mouseButtons = {
     MIDDLE: MOUSE.DOLLY,
@@ -278,8 +282,8 @@ function init() {
   orbit.enableDamping = true;
 }
 let mainLoop = function () {
-  renderer.render(scene, camera);
   requestAnimationFrame(mainLoop);
+  renderer.render(scene, camera);
   if (currentObject != null) {
     hx.value = (currentObject.position.x * scale).toFixed(2);
     hy.value = (currentObject.position.y * scale).toFixed(2);
