@@ -1,214 +1,146 @@
 .page {
-    overflow: hidden;
-} 
-
-.smol-font {
-   font-size: x-small; 
+    overflow-x: hidden;
 }
 
 .v-datalist-container {
-    height: 100%;
-    padding: 0;
+  height: 100%;
+  padding: 0;
 }
 
 .v-instruction-container {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .v-canvas-container {
-    width: 100%;
-    height: 100%;
-    min-height: 900px;
-    border: none;
+  width: 1300px;
+  height: 800px;
+  /* min-height: 900px; */
+  border: none;
 }
 
 .v-slider-full {
-    width: 80%;
-	margin: auto;
+  width: 80%;
+  margin: auto;
 }
 
 .input-form {
-    display: none;
-    color: black;
+  display: none;
+  color: black;
 }
 
 .add {
-    font-size: 0.90rem;
+  font-size: 0.9rem;
 }
 
 .left {
-    order: 1;
+  order: 1;
 }
 
 .exp {
-    order: 2;
+  order: 2;
 }
 
 .right {
-    order: 3;
+  order: 3;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1023px) {
     .left {
         order: 1;
-        
     }
-
     .right {
         order: 2;
     }
-
     .exp {
         order: 3;
     }
 }
 
 #top-border {
-    border-top: 1px solid black;
-    margin: 0.5rem;
-}
-
-.smol-wid {
-    width: 20%;
-    /* margin: 0.1rem; */
+    border-top: 0.1px dashed black;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    margin: 15% auto;
-    /* background-color: rgb(0, 0, 0); */
-    /* background-color: rgba(0, 0, 0, 0.4); */
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 15% auto;
+  /* background-color: rgb(0, 0, 0); */
+  /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
-#disp-heading { 
-    margin: 0.5rem;
+#disp-heading {
+  margin: 0.5rem;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #add-modal {
+    /* width: auto; */
     width: 50%;
-    margin: auto;
 }
 
 #edit-modal {
+    /* width: auto; */
     width: 50%;
-    margin: auto;
 }
-
 
 .v-datalist-title {
-    border-bottom: 0;
+  border-bottom: 0;
 }
 
-.v-collapsible-instruction-container {
+.slider {
+    -webkit-appearance: none;
     width: 60%;
-    margin: auto;
-    border-radius: 0.25rem;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
 }
 
-.v-collapsible {
-    width: 98%;
-    margin: auto;
-}
-
-.v-collapsible::after {
-    size: 1rem;
-}
-
-.v-button {
-    background-color: #04AA6D;
-    border-radius: 0.5rem;
-    font-size: small;
-    margin: 1rem;
-}
-
-.instr-font {
-    font-size: 0.9rem;
-}
-
-.coord-dim {
-    width: 100px;
-    margin: 0.25rem;
-}
-
-#add-shape-btn {
-    background-color: #3298dc;
-    border-radius: 0.5rem;
-}
-
-#edit-shape-btn {
-    background-color: #48c774;
-    border-radius: 0.5rem;
-}
-
-#delete-shape-btn {
-    background-color: #f14668;
-    border-radius: 0.5rem;
-}
-
-#move-button {
-    background-color: #48c774;
-    border-radius: 0.5rem;
-}
-
-#set-rotation-axis {
-    background-color: #3298dc;
-    border-radius: 0.5rem;
-}
-
-#checkboxes {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-#checkboxes label {
-    margin: 0.3rem auto;
-
-    display: flex;
-    align-items: flex-start;
-    flex: 40%;
+.slider:hover {
+    opacity: 1;
 }
 
 #lock-v #xy-grid #xz-grid #yz-grid {
-    margin: auto 0.1rem;
-    padding: auto 0.1rem;
+  margin: auto 0.1rem;
+  padding: auto 0.1rem;
 }
 
 .fields {
-	width: 50%;
+  width: 50%;
 }
 
 .field-div {
-	margin: 1rem;
+  margin: 1rem;
 }
