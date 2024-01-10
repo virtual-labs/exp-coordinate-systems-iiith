@@ -1,0 +1,54 @@
+
+/home/danny-vader/Desktop/VLEAD/2023-winter-intern/exp-coordinate-systems-iiith/experiment/simulation/assets/DragControls.js
+    1:1   warning  'THREE' is not defined  no-undef
+    2:27  warning  'THREE' is not defined  no-undef
+   11:20  warning  'THREE' is not defined  no-undef
+   12:24  warning  'THREE' is not defined  no-undef
+   14:20  warning  'THREE' is not defined  no-undef
+   15:21  warning  'THREE' is not defined  no-undef
+   16:27  warning  'THREE' is not defined  no-undef
+  232:1   warning  'THREE' is not defined  no-undef
+  232:46  warning  'THREE' is not defined  no-undef
+  233:1   warning  'THREE' is not defined  no-undef
+  233:44  warning  'THREE' is not defined  no-undef
+
+/home/danny-vader/Desktop/VLEAD/2023-winter-intern/exp-coordinate-systems-iiith/experiment/simulation/js/main.js
+   41:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   42:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   43:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   54:7  warning  Unreachable code                              no-unreachable
+   60:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   61:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   62:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   76:7  warning  Unreachable code                              no-unreachable
+   82:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   83:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   84:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+   95:7  warning  Unreachable code                              no-unreachable
+  101:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+  102:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+  105:7  warning  Unexpected lexical declaration in case block  no-case-declarations
+  119:7  warning  Unreachable code                              no-unreachable
+
+/home/danny-vader/Desktop/VLEAD/2023-winter-intern/exp-coordinate-systems-iiith/experiment/simulation/js/shapes.js
+  24:15  warning  'geometry' is assigned a value but never used  no-unused-vars
+
+/home/danny-vader/Desktop/VLEAD/2023-winter-intern/exp-coordinate-systems-iiith/experiment/simulation/main.js
+   31:3  warning  'rot' is assigned a value but never used                    no-unused-vars
+   32:3  warning  'variable' is assigned a value but never used               no-unused-vars
+   43:3  warning  'dir' is assigned a value but never used                    no-unused-vars
+   45:3  warning  'isShapeExist' is assigned a value but never used           no-unused-vars
+   46:5  warning  'dbl' is assigned a value but never used                    no-unused-vars
+  151:5  warning  'pIntersect' is assigned a value but never used             no-unused-vars
+  154:5  warning  'dragObject' is assigned a value but never used             no-unused-vars
+  281:9  warning  Unexpected newline between object and [ of property access  no-unexpected-multiline
+  311:7  warning  Unexpected lexical declaration in case block                no-case-declarations
+  312:7  warning  Unexpected lexical declaration in case block                no-case-declarations
+  313:7  warning  Unexpected lexical declaration in case block                no-case-declarations
+  363:9  warning  'gridHelper' is assigned a value but never used             no-unused-vars
+  364:9  warning  'count' is assigned a value but never used                  no-unused-vars
+  379:9  warning  'numbers' is assigned a value but never used                no-unused-vars
+  381:7  warning  'PointGeometry' is assigned a value but never used          no-unused-vars
+
+✖ 43 problems (0 errors, 43 warnings)
+

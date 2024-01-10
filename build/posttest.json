@@ -1,0 +1,66 @@
+{
+    "version": 2.0,
+    "questions": [
+        {
+            "question": "1. In a non-orthogonal coordinate system, how are point coordinates represented?",
+            "answers": {
+                "a": "As distances parallel to the axes.",
+                "b": "As perpendicular distances from orthogonal axes.",
+                "c": "As distances from the origin.",
+                "d": "As angles between axes."
+            },
+            "correctAnswer": "a",
+            "explanation": "In a non-orthogonal coordinate system, point coordinates are represented as distances taken parallel to the axes.",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "2. If the coordinates of a point in 3D space are (2,3,4), which plane is it 2 units away from?",
+            "answers": {
+                "a": "XY-plane.",
+                "b": "YZ-plane.",
+                "c": "XZ-plane.",
+                "d": "None of the above."
+            },
+            "correctAnswer": "b",
+            "explanation": "In (2,3,4), the point is 2 units away from the YZ-plane.",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "3. How are absolute coordinates related to relative coordinates in a coordinate system?",
+            "answers": {
+                "a": "They are the same.",
+                "b": "Absolute coordinates are independent of the coordinate system.",
+                "c": "Relative coordinates are derived from absolute coordinates and the coordinate system.",
+                "d": "Relative coordinates are always larger than absolute coordinates."
+            },
+            "correctAnswer": "c",
+            "explanation": "Relative coordinates are derived from absolute coordinates and the coordinate system.",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "4. Explain the concept of a non-orthogonal coordinate system and its implications on point representation.",
+            "answers": {
+                "a": "It simplifies point representation.",
+                "b": "It makes points easier to render.",
+                "c": "It represents distances parallel to the axes.",
+                "d": "It allows for more flexible positioning of points."
+            },
+            "correctAnswer": "d",
+            "explanation": "A non-orthogonal coordinate system allows for more flexible positioning of points as distances are represented parallel to the axes.",
+            "difficulty": "advanced"
+        },
+        {
+            "question": "5. How does switching from 2D to 3D view impact the representation of points in a computer graphics scene?",
+            "answers": {
+                "a": "It has no effect on point representation.",
+                "b": "Points become distorted in 3D.",
+                "c": "Points are now represented in three-dimensional space.",
+                "d": "It only changes the perspective but not the coordinates."
+            },
+            "correctAnswer": "c",
+            "explanation": "Switching from 2D to 3D view represents points in three-dimensional space in a computer graphics scene.",
+            "difficulty": "advanced"
+        }
+    ]
+  }
+  

@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "questions": [
+      {
+          "question": "1. What does the point (3,4) represent in a 2D coordinate system?",
+          "answers": {
+              "a": "3 units from the x-axis and 4 units from the y-axis.",
+              "b": "4 units from the x-axis and 3 units from the y-axis.",
+              "c": "A point on the origin.",
+              "d": "A point outside the coordinate system."
+          },
+          "correctAnswer": "a",
+          "explanation": "In a 2D coordinate system, (3,4) represents 3 units from the x-axis and 4 units from the y-axis.",
+          "difficulty": "beginner"
+      },
+      {
+          "question": "2. How are three-dimensional points represented in a coordinate system?",
+          "answers": {
+              "a": "As distances from each of the three planes formed by the axes.",
+              "b": "As distances from the x and y axes only.",
+              "c": "As distances from the origin.",
+              "d": "As distances from the xy-plane."
+          },
+          "correctAnswer": "a",
+          "explanation": "In three dimensions, points are represented as distances from each of the three planes formed by the axes.",
+          "difficulty": "beginner"
+      },
+      {
+          "question": "3. What happens when you modify the homogeneous coordinate (x, y, z, w) by changing the value of w?",
+          "answers": {
+              "a": "It changes the point's color.",
+              "b": "It scales the point's coordinates.",
+              "c": "It rotates the point.",
+              "d": "It translates the point."
+          },
+          "correctAnswer": "b",
+          "explanation": "Changing the value of w in homogeneous coordinates scales the point's coordinates.",
+          "difficulty": "beginner"
+      },
+      {
+          "question": "4. What is the purpose of homogenizing coordinates in computer graphics?",
+          "answers": {
+              "a": "To simplify point representation.",
+              "b": "To enable efficient point rendering.",
+              "c": "To allow for linear operations like translation.",
+              "d": "To increase the dimensionality of points."
+          },
+          "correctAnswer": "c",
+          "explanation": "Homogenizing coordinates in computer graphics allows for expressing common operations, such as translation, as a linear product.",
+          "difficulty": "intermediate"
+      },
+      {
+          "question": "5. What is the significance of modifying the origin and axis directions in a coordinate system?",
+          "answers": {
+              "a": "It changes the color of points.",
+              "b": "It only affects the display, not the actual coordinates.",
+              "c": "It alters how points are represented and calculated.",
+              "d": "It has no impact on point representation."
+          },
+          "correctAnswer": "c",
+          "explanation": "Modifying the origin and axis directions in a coordinate system alters how points are represented and calculated.",
+          "difficulty": "advanced"
+      }
+  ]
+}

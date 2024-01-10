@@ -1,29 +1,90 @@
-[
-{"question":" 1. <img src='images/quiz.png'><br/> Enter the points with brackets and a comman between. Ex. (5, -3)",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"a"},
-            
-{"question":"Q2. What is the point whose distance from XY plane is 3, YZ plane is -4 and XZ plane is 9 ?",
-"answers":{
-            "a":"(3, 0, -4)",
-            "b":"(-4, 3, 9)",
-            "c":"(-4, 9, 3)",
-            "d":"(-4, 9, 9)"
-          },
-"correctAnswer":"c"}, 
-
-{"question":" Q3. Convert the coordinate (12, 24, 42, 6) from homogeneous form to ordinary cartesian coordinates.  ?",
-"answers":{
-            "a":"(4, 2, 7)",
-            "b":"(7, 2, 4)",
-            "c":"(2, 4, 7)",
-            "d":"(2, 4, 4)"
-          },
-"correctAnswer":"c"}
-
-]
+{
+    "version": 2.0,
+    "questions": [
+        {
+            "question": "1. What does the point (3,4) represent in a 2D coordinate system?",
+            "answers": {
+                "a": "3 units from the x-axis and 4 units from the y-axis.",
+                "b": "4 units from the x-axis and 3 units from the y-axis.",
+                "c": "A point on the origin.",
+                "d": "A point outside the coordinate system."
+            },
+            "correctAnswer": "a",
+            "explanations": {
+                "a": "Correct! (3,4) represents 3 units from the x-axis and 4 units from the y-axis.",
+                "b": "Incorrect. This would be (4,3), not (3,4).",
+                "c": "Incorrect. (0,0) represents the origin, not (3,4).",
+                "d": "Incorrect. (3,4) is a valid point within the coordinate system."
+            },
+            "difficulty": "beginner"
+        },
+        {
+            "question": "2. How are three-dimensional points represented in a coordinate system?",
+            "answers": {
+                "a": "As distances from each of the three planes formed by the axes.",
+                "b": "As distances from the x and y axes only.",
+                "c": "As distances from the origin.",
+                "d": "As distances from the xy-plane."
+            },
+            "correctAnswer": "a",
+            "explanations": {
+                "a": "Correct! In three dimensions, points are represented as distances from each of the three planes formed by the axes.",
+                "b": "Incorrect. Three-dimensional points consider all three axes.",
+                "c": "Incorrect. This describes how one-dimensional points are represented.",
+                "d": "Incorrect. The xy-plane is only one of the planes considered in three-dimensional coordinates."
+            },
+            "difficulty": "beginner"
+        },
+        {
+            "question": "3. What happens when you modify the homogeneous coordinate (x, y, z, w) by changing the value of w?",
+            "answers": {
+                "a": "It changes the point's color.",
+                "b": "It scales the point's coordinates.",
+                "c": "It rotates the point.",
+                "d": "It translates the point."
+            },
+            "correctAnswer": "b",
+            "explanations": {
+                "a": "Incorrect. Homogeneous coordinates don't affect color in this context.",
+                "b": "Correct! Changing the value of w scales the point's coordinates.",
+                "c": "Incorrect. Homogeneous coordinates are typically associated with scaling, not rotation.",
+                "d": "Incorrect. Translation is not associated with modifying the homogeneous coordinate's w value."
+            },
+            "difficulty": "beginner"
+        },
+        {
+            "question": "4. What is the purpose of homogenizing coordinates in computer graphics?",
+            "answers": {
+                "a": "To simplify point representation.",
+                "b": "To enable efficient point rendering.",
+                "c": "To allow for linear operations like translation.",
+                "d": "To increase the dimensionality of points."
+            },
+            "correctAnswer": "c",
+            "explanations": {
+                "a": "Incorrect. Homogenizing coordinates adds complexity for specific reasons.",
+                "b": "Incorrect. Rendering efficiency is not the primary purpose of homogenization.",
+                "c": "Correct! Homogenizing coordinates allows for expressing common operations, such as translation, as a linear product.",
+                "d": "Incorrect. Homogenization doesn't inherently increase the dimensionality of points."
+            },
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "8. What is the significance of modifying the origin and axis directions in a coordinate system?",
+            "answers": {
+                "a": "It changes the color of points.",
+                "b": "It only affects the display, not the actual coordinates.",
+                "c": "It alters how points are represented and calculated.",
+                "d": "It has no impact on point representation."
+            },
+            "correctAnswer": "c",
+            "explanations": {
+                "a": "Incorrect. Modifying the origin and axis directions doesn't affect color.",
+                "b": "Incorrect. It directly impacts both the display and actual coordinates.",
+                "c": "Correct! Modifying the origin and axis directions alters how points are represented and calculated.",
+                "d": "Incorrect. Modifying the origin and axis directions has a significant impact on point representation."
+            },
+            "difficulty": "advanced"
+        }
+    ]
+}
