@@ -1,11 +1,24 @@
-This experiment is designed to teach how points and co-ordinate systems are represented in computer graphics. The tree at the right shows a point and the associated co-ordinate system.  
+### Experiment Procedure
 
-Start by editing the co-ordinates of the point and comparing how the point gets displayed. The co-ordinates can be edited by clicking on the node under **Instance->Shape->Vertices**  
+1. **Understanding Point Representation:**
+   - Navigate to `Instance -> Shape -> Vertices` and locate the node corresponding to the point.
+   - Edit the coordinates of the point to observe how it is displayed.
 
-Now try modifying the co-ordinate system's origin and axis directions. This can be done by clicking on the nodes under **Instance->Co-ordinate System**. Notice how the point is redrawn using the modified co-ordinate system. Also notice how the absolute co-ordinates are displayed.  
+2. **Modifying Coordinate System:**
+   - Navigate to `Instance -> Coordinate System` and adjust the origin and axis directions.
+   - Observe how the point is redrawn using the modified coordinate system.
+   - Take note of the absolute coordinates displayed.
 
-All points shown within '[' and ']' use homogeneous co-ordinates, i.e., the fourth component **w** acts as a scaling factor for calculating the cartesian co-ordinates. Modify this component and notice how the point's co-ordinates get scaled.  
+3. **Homogeneous Coordinates:**
+   - Points shown within '[' and ']' use homogeneous coordinates.
+   - Modify the fourth component (w) and observe how it scales the point's coordinates.
 
-You can also modify the absolute co-ordinates of the point and see how the relative co-ordinates get calculated with respect to the co-ordinate system.  
+4. **Absolute vs. Relative Coordinates:**
+   - Edit the absolute coordinates of the point and observe how relative coordinates are calculated with respect to the coordinate system.
 
-This scene is currently shown in 2D but you can switch to 3D under the Display tab and perform all the previous actions in 3D. Drag with the right mouse button to rotate the view and use the mouse wheel to zoom in and out.  
+5. **Switch to 3D:**
+   - Under the `Display` tab, switch to 3D view.
+   - Perform all previous actions in 3D.
+   - Use right mouse button drag to rotate the view and the mouse wheel to zoom in and out.
+
+**Note:** This experiment focuses on understanding the representation of points in 2D and 3D space using both orthogonal and non-orthogonal coordinate systems in the context of computer graphics.
