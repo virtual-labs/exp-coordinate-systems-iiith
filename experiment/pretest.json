@@ -70,7 +70,7 @@
             "difficulty": "intermediate"
         },
         {
-            "question": "8. What is the significance of modifying the origin and axis directions in a coordinate system?",
+            "question": "5. What is the significance of modifying the origin and axis directions in a coordinate system?",
             "answers": {
                 "a": "It changes the color of points.",
                 "b": "It only affects the display, not the actual coordinates.",
