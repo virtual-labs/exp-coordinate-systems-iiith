@@ -10,42 +10,44 @@
 </head>
 
 <body class="page">
-  <section class="columns is-centered is-flex column">
-    <div class="v-collapsible-instruction-container">
-      <div class="v-collapsible">Instructions</div>
-      <div id="procedure-message" class="v-content">
-        <li class="instr-font">
-          This experiment is designed to teach how points and shapes are
-          represented in computer graphics. Start by editing the coordinates
-          of the point in the text boxes which are in the Point-Coordinates
-          section.
-        </li>
-        <li class="instr-font">
-          Left click and drag the mouse to change the position of the object
-          while observing the change in coordinates in the observations
-          section.
-        </li>
-        <li class="instr-font">
-          Check the values in the text boxes by changing scaling factor.
-        </li>
-        <li class="instr-font">
-          Choose a new shape , from the add shape menu section.
-        </li>
-        <li class="instr-font">
-          choose a new shape , to reset the canvas with the new shape
-        </li>
-        <li class="instr-font">Drag the shapes to anywhere on the screen.</li>
-        <li class="instr-font">
-          Tick on the checkboxes to add xy-grid and yz-grid and xz-grid and
-          similarly untick to delete.
-        </li>
-        <li class="instr-font">
-          Enable Lock Vertices option and drag from anywhere on the canvas
-          which results in translation of the whole simulation.
-        </li>
+  <div class="columns is-centered column">
+    <div class="v-collapsible-instruction-container v-instruction-container">
+      <div id="instruction-title" class="v-collapsible is-size-5">Instructions</div>
+      <div id="procedure-message" class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+        <ul style="list-style: disc;">
+          <li class="instr-font">
+            This experiment is designed to teach how points and shapes are
+            represented in computer graphics. Start by editing the coordinates
+            of the point in the text boxes which are in the Point-Coordinates
+            section.
+          </li>
+          <li class="instr-font">
+            Left click and drag the mouse to change the position of the object
+            while observing the change in coordinates in the observations
+            section.
+          </li>
+          <li class="instr-font">
+            Check the values in the text boxes by changing scaling factor.
+          </li>
+          <li class="instr-font">
+            Choose a new shape , from the add shape menu section.
+          </li>
+          <li class="instr-font">
+            choose a new shape , to reset the canvas with the new shape
+          </li>
+          <li class="instr-font">Drag the shapes to anywhere on the screen.</li>
+          <li class="instr-font">
+            Tick on the checkboxes to add xy-grid and yz-grid and xz-grid and
+            similarly untick to delete.
+          </li>
+          <li class="instr-font">
+            Enable Lock Vertices option and drag from anywhere on the canvas
+            which results in translation of the whole simulation.
+          </li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
 
   <main class="columns is-centered is-variable is-1-mobile is-flex is-flex-wrap-wrap workspace">
     <div id="left" class="column is-2-desktop is-5-tablet is-5-mobile apparatus">
@@ -155,8 +157,8 @@
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
   <script src="assets/DragControls.js"></script>
-  <script type="module" src="./js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 
 </html>
