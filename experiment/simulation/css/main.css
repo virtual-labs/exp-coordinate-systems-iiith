@@ -1,5 +1,5 @@
 .page {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .v-datalist-container {
@@ -17,7 +17,7 @@
 .v-canvas-container {
   width: 1300px;
   height: 800px;
-  /* min-height: 900px; */
+  min-height: 900px;
   border: none;
 }
 
