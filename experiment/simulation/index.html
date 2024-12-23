@@ -10,147 +10,237 @@
 </head>
 
 <body class="page">
-  <div class="columns is-centered column">
-    <div class="v-collapsible-instruction-container v-instruction-container">
-      <div id="instruction-title" class="v-collapsible is-size-5">Instructions</div>
-      <div id="procedure-message" class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
-        <ul style="list-style: disc;">
-          <li class="instr-font">
-            This experiment is designed to teach how points and shapes are
-            represented in computer graphics. Start by editing the coordinates
-            of the point in the text boxes which are in the Point-Coordinates
-            section.
-          </li>
-          <li class="instr-font">
-            Left click and drag the mouse to change the position of the object
-            while observing the change in coordinates in the observations
-            section.
-          </li>
-          <li class="instr-font">
-            Check the values in the text boxes by changing scaling factor.
-          </li>
-          <li class="instr-font">
-            Choose a new shape , from the add shape menu section.
-          </li>
-          <li class="instr-font">
-            choose a new shape , to reset the canvas with the new shape
-          </li>
-          <li class="instr-font">Drag the shapes to anywhere on the screen.</li>
-          <li class="instr-font">
-            Tick on the checkboxes to add xy-grid and yz-grid and xz-grid and
-            similarly untick to delete.
-          </li>
-          <li class="instr-font">
-            Enable Lock Vertices option and drag from anywhere on the canvas
-            which results in translation of the whole simulation.
-          </li>
-        </ul>
+  <section class="columns is-centered is-flex column">
+  
+    <!-- Instruction Toggle Button -->
+    <div class="v-collapsible-instruction-container">
+      <div class="v-collapsible" id="toggle-instructions"
+        style="cursor: pointer; background: #f1f1f1; padding: 10px; border-radius: 5px;">
+        <strong>Instructions</strong>
       </div>
     </div>
-  </div>
+  
+    <!-- Fullscreen Instructions Modal -->
+    <div id="procedure-message" class="v-content">
+      <ol>
+        <li class="instr-font"> <strong style="font-size: 19px;">🖱️Mouse Controls</strong>:
+          <ul style="list-style-type: disc;padding-left: 20px;">
+            <li><strong>Left Mouse</strong>: Used for translating (shifting) the entire simulation by
+              left-clicking and dragging
+              the cursor.</li>
+            <li><strong>Right Mouse</strong>: Used for rotating the simulation by right-clicking and
+              dragging
+              the cursor.</li>
+            <li><strong>Middle Mouse</strong>: Used for zooming in and out of the simulation by
+              scrolling.</li>
+          </ul>
+  
+        </li>
+        <li class="instr-font">
+          <strong style="font-size: 19px;">🔒Lock Options</strong>:
+          <ul style="list-style-type: disc;padding-left: 20px;">
+            <li><strong>Lock Graph</strong>: Disables the translation (shifting) of the simulation when
+              enabled.
+            </li>
+            <li><strong>Lock Zoom</strong>: Prevents zooming functionality when enabled, disabling the
+              middle
+              mouse button.</li>
+            <li><strong>Lock Rotate</strong>: Disables the rotation of the simulation when enabled,
+              disabling
+              the right mouse button.</li>
+          </ul>
+        </li>
+        <li class="instr-font">
+          <strong style="font-size: 19px;">➕Shape Controls</strong>:
+          <ul style="list-style-type: disc;padding-left: 20px;">
+            <li>Click the <strong style="color: #3298dc;font-size: 18px;">Add</strong> button to open a
+              modal
+              where you can select a shape type and
+              specify the coordinates for positioning.
+              <ul style="list-style-type: disc;padding-left: 20px;">
+                <li>
+                  <strong>Note</strong>:⚠️ Do not create any two shapes with the same coordinates.
+                </li>
+  
+              </ul>
+            </li>
+            <li>Click the <strong style="color: #970473;font-size: 18px;">Select</strong> button to
+              choose a
+              shape, which will highlight it with a
+              spherical outline in the scene for easy identification.</li>
+            <ul style="list-style-type: disc;padding-left: 20px;">
+  
+              <li>After selecting, click the <strong style="color: #48c774; font-size: 18px;">Edit</strong>
+                button to modify the
+                shape's properties or position.</li>
+              <li> After selecting, click the <strong style="color: #f14668;font-size: 18px;">Delete</strong>
+                button to remove the shape
+                from the scene.</li>
+  
+            </ul>
+          </ul>
+        </li>
+  
+  
+        <li class="instr-font">
+          <strong style="font-size: 19px;">📊Grid Options</strong>: Check the corresponding checkboxes to
+          display
+          the
+          <strong>XY-grid</strong>, <strong>YZ-grid</strong>, and <strong>XZ-grid</strong>, and uncheck
+          them to
+          remove them from view.
+        </li>
+  
+       
+  
+  
+      </ol>
+    </div>
+    </div>
+  
+  </section>
 
   <main class="columns is-centered is-variable is-1-mobile is-flex is-flex-wrap-wrap workspace">
-    <div id="left" class="column is-2-desktop is-5-tablet is-5-mobile apparatus">
+    <aside id="left" class="column is-2-desktop is-5-tablet is-5-mobile apparatus">
       <div class="v-datalist-container">
         <div class="v-datalist-row">
-          <div class="v-datalist-title" id="disp-heading">
-            Display Settings
-          </div>
+          <div class="v-datalist-title">Display Settings</div>
+  
           <div id="checkboxes">
-            <label id="lock-v" class="v-checkbox">
-              <input type="checkbox" id="lock-vertices-cb" />
-              <span> lock vertices </span>
+            <label class="v-checkbox">
+              <input type="checkbox" id="lock-vertices-cb">
+              <span class="smol-font"> Lock Graph </span>
             </label>
-
-            <label id="xy-grid" class="v-checkbox">
-              <input type="checkbox" id="xy-grid-cb" />
-              <span>XY-Grid </span>
+  
+            <label class="v-checkbox">
+              <input type="checkbox" id="xy-grid-cb">
+              <span class="smol-font">XY-Grid </span>
             </label>
-
-            <label id="yz-grid" class="v-checkbox">
-              <input type="checkbox" id="yz-grid-cb" />
-              <span>YZ-Grid </span>
+  
+            <label class="v-checkbox">
+              <input type="checkbox" id="lock-zoom-cb">
+              <span class="smol-font"> Lock Zoom </span>
             </label>
-
-            <label id="xz-grid" class="v-checkbox">
-              <input type="checkbox" id="xz-grid-cb" />
-              <span>XZ-Grid </span>
+  
+            <label class="v-checkbox">
+              <input type="checkbox" id="yz-grid-cb">
+              <span class="smol-font">YZ-Grid </span>
+            </label>
+  
+            <label class="v-checkbox">
+              <input type="checkbox" id="lock-rotate-cb">
+              <span class="smol-font"> Lock Rotate </span>
+            </label>
+  
+            <label class="v-checkbox">
+              <input type="checkbox" id="xz-grid-cb">
+              <span class="smol-font">XZ-Grid </span>
             </label>
           </div>
         </div>
+  
         <div class="v-datalist-row" id="top-border">
           <div class="v-datalist-title">Shape Controls</div>
-
-          <button id="add-shape-btn" class="v-button is-small is-responsive is-info">
-            Add
-          </button>
-          <button id="delete-shape-btn" class="v-button is-small is-responsive is-danger">
-            Delete
-          </button>
-
-          <section id="add-modal" class="modal is-responsive is-centered">
+          <p>
+            <button id="add-shape-btn" style="margin:0.25rem;"
+              class="v-button is-small is-responsive is-info">Add</button>
+            <button id="edit-shape-btn" style="margin:0.25rem;"
+              class="v-button is-small is-responsive  is-success">Edit</button>
+            <button id="delete-shape-btn" style="margin:0.25rem;"
+              class="v-button is-small is-responsive  is-danger">Delete</button>
+  
+          <section id="edit-modal" class="modal is-responsive">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <p class="v-datalist-title">Add Shape Menu</p>
-              <div class="select">
-                <select id="shape-add-dropdown" value="dropdown">
+              <p class="v-datalist-title"> Edit Shape Menu</p>
+              <div class="select" style="display: inline-block; margin: 0.5rem">
+                <select name="" id="shape-edit-dropdown" value="dropdown">
+                  <option value="Cube">Cube</option>
                   <option value="Tetrahedron">Tetrahedron</option>
                   <option value="Octahedron">Octahedron</option>
                   <option value="Dodecahedron">Dodecahedron</option>
-                  <option value="Cube">Cube</option>
                 </select>
               </div>
-
-              <div class="input-div">
-                <input class="input coord-dim" id="x1" type="number" placeholder="X" step=".01" value="0" />
-                <input class="input coord-dim" id="y1" type="number" placeholder="Y" step=".01" value="0" />
-                <input class="input coord-dim" id="z1" type="number" placeholder="Z" step=".01" value="0" />
+  
+              <div style="display: block; margin: auto">
+                <input class="input coord-dim" id="x" type="number" placeholder="X" step=".01" value="0">
+                <input class="input coord-dim" id="y" type="number" placeholder="Y" step=".01" value="0">
+                <input class="input coord-dim" id="z" type="number" placeholder="Z" step=".01" value="0">
               </div>
               <div class="control">
-                <button class="v-button add-button" id="modalBox_addsubmit">
-                  Add !
-                </button>
+                <button class="v-button edit-button" id="modalBox_addsubmit"
+                  style="width: 10rem; margin: 1rem;">Edit</button>
               </div>
             </div>
+  
           </section>
-        </div>
-
-        <div class="v-datalist-row" id="top-border">
-          <div class="v-datalist-title">Initial Position</div>
-          <div class="point-container">
-            <label for="x-value">X:</label>
-            <input class="input is-responsive is-small smol-wid" type="number" id="x-value" value="3" placeholder="X" />
-            <label for="y-value">Y:</label>
-            <input class="input is-responsive is-small smol-wid" type="number" id="y-value" value="3" placeholder="Y" />
-            <label for="z-value">Z:</label>
-            <input class="input is-responsive is-small smol-wid" type="number" id="z-value" value="3" placeholder="Z" />
-          </div>
-          <input class="button is-responsive is-small is-link" id="move-button" type="submit" value="Move" />
-        </div>
-
-        <div class="v-datalist-row" id="top-border">
-          <div class="v-datalist-title">Observations</div>
-
-          <section>
-            <div class="observations">
-              <label for="h-x">X:</label>
-              <input class="input is-responsive is-small smol-wid" type="number" id="h-x" value="3" placeholder="X" />
-              <label for="h-y">Y:</label>
-              <input class="input is-responsive is-small smol-wid" type="number" id="h-y" value="3" placeholder="Y" />
-              <label for="h-z">Z:</label>
-              <input class="input is-responsive is-small smol-wid" type="number" id="h-z" value="3" placeholder="Z" />
+  
+  
+          <section id="add-modal" class="modal is-responsive is-centered">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p class="v-datalist-title"> Add Shape Menu</p>
+              <div class="select" style="display: inline-block; margin: 0.5rem">
+                <select name="" id="shape-add-dropdown" value="dropdown">
+                  <option value="Cube">Cube</option>
+                  <option value="Tetrahedron">Tetrahedron</option>
+                  <option value="Octahedron">Octahedron</option>
+                  <option value="Dodecahedron">Dodecahedron</option>
+                </select>
+              </div>
+  
+              <div style="display: block; margin: auto">
+                <input class="input coord-dim" id="x1" type="number" placeholder="X" step=".01" value="0">
+                <input class="input coord-dim" id="y1" type="number" placeholder="Y" step=".01" value="0">
+                <input class="input coord-dim" id="z1" type="number" placeholder="Z" step=".01" value="0">
+              </div>
+              <div class="control">
+                <button class="v-button add-button" id="modalBox_addsubmit" style="margin: 1rem;">Add!</button>
+              </div>
             </div>
-
-            <div class="container">
-              <label>Scaling Factor</label>
-              <input class="input is-responsive is-small smol-wid" type="number" id="h-s" value="1" step="0.01"
-                placeholder="Scale" />
-            </div>
+  
           </section>
+          </p>
         </div>
+        <!-- <div class="v-datalist-row" id="top-border">
+                      <div class="v-datalist-title">Vertices</div>
+                      <div style="display: flexbox;">
+                          A&nbsp;<input class="input is-responsive is-small" style="width:20%" type="number"
+                              id="vertex-00" value="-1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-01"
+                              value="1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-02"
+                              value="-1" placeholder="X">
+                      </div>
+  
+                      <div style="display: flexbox;">
+                          B&nbsp;<input class="input is-responsive is-small" style="width:20%" type="number"
+                              id="vertex-10" value="-1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-11"
+                              value="-1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-12"
+                              value="1" placeholder="X">
+                      </div>
+                      <div style="display: flexbox;">
+                          C&nbsp;<input class="input is-responsive is-small" style="width:20%" type="number"
+                              id="vertex-20" value="1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-21"
+                              value="1" placeholder="X">
+                          <input class="input is-responsive is-small" style="width:20%" type="number" id="vertex-22"
+                              value="1" placeholder="X">
+                      </div>
+                      <input class="button is-responsive is-small is-link" style="margin: 1rem;" id="move-button"
+                          type="submit" value="Set position">
+                  </div> -->
+        <div class="v-datalist-title-shapes">Shapes</div>
+        <div id="shape-list" class="shape-list-container">
+          <!-- Shapes will be dynamically added here -->
+        </div>
+  
+  
       </div>
-    </div>
-
+    </aside>
+    
     <div class="column is-8-desktop is-10-tablet is-10-mobile exp">
       <div class="v-canvas-container" id="canvas-main"></div>
     </div>
