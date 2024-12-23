@@ -7,12 +7,12 @@
                 "a": "3 units from the x-axis and 4 units from the y-axis.",
                 "b": "4 units from the x-axis and 3 units from the y-axis.",
                 "c": "A point on the origin.",
-                "d": "A point outside the coordinate system."
+                "d": "A point outside the c oordinate system."
             },
-            "correctAnswer": "a",
+            "correctAnswer": "b",
             "explanations": {
-                "a": "Correct! (3,4) represents 3 units from the x-axis and 4 units from the y-axis.",
-                "b": "Incorrect. This would be (4,3), not (3,4).",
+                "a": "Incorrect! This represents (4,3) in a 2D coordinate system.",
+                "b": "Correct. (3,4) represents 4 units from the x-axis and 3 units from the y-axis",
                 "c": "Incorrect. (0,0) represents the origin, not (3,4).",
                 "d": "Incorrect. (3,4) is a valid point within the coordinate system."
             },
