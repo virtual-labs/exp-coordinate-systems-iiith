@@ -1,24 +1,24 @@
-### Experiment Procedure
+## Interactive Simulation Procedure
 
-1. **Understanding Point Representation:**
-   - Navigate to `Instance -> Shape -> Vertices` and locate the node corresponding to the point.
-   - Edit the coordinates of the point to observe how it is displayed.
+### Add a Shape:
 
-2. **Modifying Coordinate System:**
-   - Navigate to `Instance -> Coordinate System` and adjust the origin and axis directions.
-   - Observe how the point is redrawn using the modified coordinate system.
-   - Take note of the absolute coordinates displayed.
+1. **Click Add Shape:**
+   - Click on the **Add Shape** button.
+   
+2. **Select Shape Coordinates:**
+   - Specify the coordinates for the shape.
+   
+3. **Submit Shape:**
+   - Click **Add** to add the specified shape to the simulation.
 
-3. **Homogeneous Coordinates:**
-   - Points shown within '[' and ']' use homogeneous coordinates.
-   - Modify the fourth component (w) and observe how it scales the point's coordinates.
+### Select and Edit Shape:
 
-4. **Absolute vs. Relative Coordinates:**
-   - Edit the absolute coordinates of the point and observe how relative coordinates are calculated with respect to the coordinate system.
+1. **Click Select Shape:**
+   - Use the **Select Shape** option to pick a shape for modification within the simulation.
+   
+2. **Edit Shape:**
+   - Click **Edit Shape** to adjust the properties or position of the selected shape.
 
-5. **Switch to 3D:**
-   - Under the `Display` tab, switch to 3D view.
-   - Perform all previous actions in 3D.
-   - Use right mouse button drag to rotate the view and the mouse wheel to zoom in and out.
+### Observing Shape in Coordinate System:
 
-**Note:** This experiment focuses on understanding the representation of points in 2D and 3D space using both orthogonal and non-orthogonal coordinate systems in the context of computer graphics.
+This experiment visually demonstrates how shapes are represented within a coordinate system. By adding shapes and adjusting their positions or properties, the simulation illustrates how different coordinates affect the appearance and positioning of shapes. This exploration helps in understanding how coordinates define the spatial arrangement and visual representation of objects in graphical simulations.
