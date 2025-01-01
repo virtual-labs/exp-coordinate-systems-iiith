@@ -2,12 +2,12 @@
     "version": 2.0,
     "questions": [
         {
-            "question": "1. What does the point (3,4) represent in a 2D coordinate system?",
+            "question": "1. What does the point (3,4) represent in a 2D Co-ordinate system?",
             "answers": {
                 "a": "3 units from the x-axis and 4 units from the y-axis.",
                 "b": "4 units from the x-axis and 3 units from the y-axis.",
                 "c": "A point on the origin.",
-                "d": "A point outside the c oordinate system."
+                "d": "A point outside the co-ordinate system."
             },
             "correctAnswer": "b",
             "explanations": {

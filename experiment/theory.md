@@ -1,6 +1,7 @@
 Two-dimensional points are represented as perpendicular distances from orthogonal axes, typically denoted as X and Y. For instance, (2,3) signifies a point 2 units from the y-axis and 3 units from the x-axis. If the coordinate axes are non-orthogonal, the point represents distances taken parallel to the axes.
 
-<img src="images/Cartesian-coordinate-system.svg">  
+<img src="images/Cartesian-coordinate-system.svg"><br>
+[Image Source: Wikipedia]
 
 In three dimensions, points are represented as distances from each of the three planes formed by the axes. For example, (2,3,4) represents a point 2 units from the YZ-plane, 3 units from the XZ-plane, and 4 units from the XY-plane.
 
