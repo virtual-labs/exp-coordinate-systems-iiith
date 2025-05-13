@@ -57,7 +57,7 @@
             "answers": {
                 "a": "To simplify point representation.",
                 "b": "To enable efficient point rendering.",
-                "c": "To allow for linear operations like translation.",
+                "c": "To linearize translation.",
                 "d": "To increase the dimensionality of points."
             },
             "correctAnswer": "c",
