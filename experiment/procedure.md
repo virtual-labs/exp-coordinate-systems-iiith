@@ -21,4 +21,4 @@
 
 ### Observing Shape in Coordinate System:
 
-This experiment visually demonstrates how shapes are represented within a coordinate system. By adding shapes and adjusting their positions or properties, the simulation illustrates how different coordinates affect the appearance and positioning of shapes. This exploration helps in understanding how coordinates define the spatial arrangement and visual representation of objects in graphical simulations.
+This experiment visually demonstrates how shapes are represented within a coordinate system. Users can add shapes and modify their positions or properties to observe how different coordinates affect their appearance and placement. The grid serves as a visual reference to aid understanding, but it does not represent actual units unless it is specifically scaled. This exploration helps in understanding how coordinates define the spatial arrangement and visual representation of objects in graphical simulations.
