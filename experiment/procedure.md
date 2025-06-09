@@ -1,11 +1,24 @@
-This experiment is designed to teach how points and co-ordinate systems are represented in computer graphics. The tree at the right shows a point and the associated co-ordinate system.  
+## Interactive Simulation Procedure
 
-Start by editing the co-ordinates of the point and comparing how the point gets displayed. The co-ordinates can be edited by clicking on the node under **Instance->Shape->Vertices**  
+### Add a Shape:
 
-Now try modifying the co-ordinate system's origin and axis directions. This can be done by clicking on the nodes under **Instance->Co-ordinate System**. Notice how the point is redrawn using the modified co-ordinate system. Also notice how the absolute co-ordinates are displayed.  
+1. **Click Add Shape:**
+   - Click on the **Add Shape** button.
+   
+2. **Select Shape Coordinates:**
+   - Specify the coordinates for the shape.
+   
+3. **Submit Shape:**
+   - Click **Add** to add the specified shape to the simulation.
 
-All points shown within '[' and ']' use homogeneous co-ordinates, i.e., the fourth component **w** acts as a scaling factor for calculating the cartesian co-ordinates. Modify this component and notice how the point's co-ordinates get scaled.  
+### Select and Edit Shape:
 
-You can also modify the absolute co-ordinates of the point and see how the relative co-ordinates get calculated with respect to the co-ordinate system.  
+1. **Click Select Shape:**
+   - Use the **Select Shape** option to pick a shape for modification within the simulation.
+   
+2. **Edit Shape:**
+   - Click **Edit Shape** to adjust the properties or position of the selected shape.
 
-This scene is currently shown in 2D but you can switch to 3D under the Display tab and perform all the previous actions in 3D. Drag with the right mouse button to rotate the view and use the mouse wheel to zoom in and out.  
+### Observing Shape in Coordinate System:
+
+This experiment visually demonstrates how shapes are represented within a coordinate system. Users can add shapes and modify their positions or properties to observe how different coordinates affect their appearance and placement. The grid serves as a visual reference to aid understanding, but it does not represent actual units unless it is specifically scaled. This exploration helps in understanding how coordinates define the spatial arrangement and visual representation of objects in graphical simulations.
